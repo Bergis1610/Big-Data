@@ -1,0 +1,4 @@
+Kari,Trondheim
+Ola,Oslo
+Kate,Trondheim
+Per,Fosnavaag
