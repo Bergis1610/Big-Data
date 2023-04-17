@@ -31,10 +31,11 @@ def read_parameters():
 def bloom_filter(new_pass, hashing_functions, bloom_filter_array):
 
     # implement your code here
-    n = parameters_dictionary.get("n")
+    for f in hashing_functions:
+        hash_value = f(new_pass)
+        bloom_filter_array[hash_value] = 1
 
-    # password = new_pass.h
-    return 0
+    return bloom_filter_array
 
 
 def bloom_filter_array():
@@ -98,9 +99,9 @@ def hash_functions():
 
     # implement your code here
     h = parameters_dictionary.get("h")
-    #print("h: ",h)
+    # print("h: ",h)
     n = parameters_dictionary.get("n")
-    #print("n: ", n)
+    # print("n: ", n)
     primes = []
     hash_functions = []
     for q in range(h):
@@ -117,16 +118,20 @@ def hash_functions():
 
     for l in range(h):
         p = primes[l]
-        print(p)
 
         def hash_function(s, p=p):
             num = 0
+            s = encode_string(s)
             for i in range(len(s)):
                 num += s[i] * p ** i
             return num % n
         hash_functions.append(hash_function)
     # print(primes)
     return hash_functions
+
+
+def check_password():
+    return
 
 
 if __name__ == '__main__':
