@@ -46,6 +46,13 @@ def bloom_filter_array():
 # for each password read
 
 
+def encode_string(s):
+    enc = []
+    for char in s:
+        enc.append(ord(char))
+    return (enc)
+
+
 def read_data(file, hashing_functions):
     time_sum = 0
     pass_read = 0
@@ -91,11 +98,12 @@ def hash_functions():
 
     # implement your code here
     h = parameters_dictionary.get("h")
+    #print("h: ",h)
     n = parameters_dictionary.get("n")
+    #print("n: ", n)
     primes = []
     hash_functions = []
-
-    for i in range(h):
+    for q in range(h):
         cont = True
         while cont:
             # Generate a random number in the range [lower_bound, upper_bound]
@@ -105,14 +113,19 @@ def hash_functions():
             if is_prime(p) & p not in primes:
                 cont = False
                 primes.append(p)
+    # print(primes)
 
-        def hash_function(s):
+    for l in range(h):
+        p = primes[l]
+        print(p)
+
+        def hash_function(s, p=p):
             num = 0
             for i in range(len(s)):
                 num += s[i] * p ** i
             return num % n
         hash_functions.append(hash_function)
-
+    # print(primes)
     return hash_functions
 
 
