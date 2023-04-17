@@ -99,9 +99,9 @@ def hash_functions():
 
     # implement your code here
     h = parameters_dictionary.get("h")
-    # print("h: ",h)
+
     n = parameters_dictionary.get("n")
-    # print("n: ", n)
+
     primes = []
     hash_functions = []
     for q in range(h):
@@ -114,7 +114,6 @@ def hash_functions():
             if is_prime(p) & p not in primes:
                 cont = False
                 primes.append(p)
-    # print(primes)
 
     for l in range(h):
         p = primes[l]
@@ -126,12 +125,23 @@ def hash_functions():
                 num += s[i] * p ** i
             return num % n
         hash_functions.append(hash_function)
-    # print(primes)
+
     return hash_functions
 
 
-def check_password():
-    return
+def check_password(password, hash_functions):
+    present = []
+
+    for f in hash_functions:
+        hash_value = f(password)
+        if bloom_filter_array[hash_value] == 1:
+            present.append(1)
+        else:
+            present.append(0)
+    if 0 in present:
+        return False
+    else:
+        return True
 
 
 if __name__ == '__main__':
