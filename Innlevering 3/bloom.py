@@ -61,7 +61,7 @@ def encode_string(s):
 def read_data(file, hashing_functions, array):
     time_sum = 0
     pass_read = 0
-    with file.open() as f:
+    with file.open(encoding='cp437') as f:
         for line in f:
             pass_read += 1
             new_password = line[:-3]
